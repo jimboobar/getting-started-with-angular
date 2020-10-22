@@ -1,78 +1,61 @@
-# Getting Started With Angular (Step 2)
-Now that we have created **my-app**, the next steps are:
-- Install Angular Material
-- Create Material Module
+# Getting Started With Angular (Step 3)
+Now that we have created **my-app** and have Materials setup, the next steps is to:
+- Create a Dashboard Component
+- Setup routing for Dashboard Component
+- Setup navigation to Dashboard
 
-## Install Angular Material
-Follow the official documentation available here:
-- https://material.angular.io/guide/getting-started
-
-Go to **my-app**-folder, type `cd my-app` in terminal.
-
-Then type the following to add Angular Material:
+## Creating a Dashboard component
+To create a component we type the following in the terminal window:
 ```bash
-ng add @angular/material
+ng generate component component/dashboard
 ```
-When adding:
-- Choose a prebuilt theme for simplicity
-- Select **Yes** to setup typography styles
-- Select **Yes** to setup browser animations
-- Then wait for packages to be installed
+This creates an an Angular component under `src/app/component/dashboard`. And the component is also automatically added as a declaration in `src/app/app.module.ts`.
 
-## Create Material Module
-To create our first module we type the following in the terminal window:
-```bash
-ng generate module modules/material
-```
-This creates an an Angular module under `src/app/modules/material`.
-
-Then open `src/app/modules/material/material.module.ts` to look like:
+## Setup Routing for Dashboard Component
+To enable routing to Dashboard we must update `src/app/app-routing.module.ts`.
 ```typescript
 import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-const materialModules = [
-  // Material modules will be added here as we need them
+const routes: Routes = [
+  // Mapping AppComponent to root path
+  { path: '', component: AppComponent },
+  // Mapping AppComponent to path '/dashboard'
+  { path: 'dashboard', component: DashboardComponent },
 ];
 
 @NgModule({
-  imports: materialModules,
-  exports: materialModules
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class MaterialModule { }
+export class AppRoutingModule { }
+```
+By doing this we can now open `http://localhost:4200/dashboard` in a browser.
+
+## Setup navigation to Dashboard
+The HTML tag `<router-outlet></router-outlet>` controls what routed content to be diplsayed.
+
+So lets update `src/app/app.component.html` with some links for navigation:
+```html
+<ul>
+  <li><a href="#" routerLink="/">Home</a></li>
+  <li><a href="#" routerLink="/dashboard">Dashboard</a></li>
+</ul>
+<router-outlet></router-outlet>
 ```
 
-## Import Material Module
-Now that we have created a module we need to import it to `src/app/app.module.ts`. When done, the result should look like:
-```typescript
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// This is where our module is imported from
-import { MaterialModule } from './modules/material/material.module';
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MaterialModule // <-- Our module is added here
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-
+Now we should be able to verify the changes by starting the development server in terminal:
+```bash
+ng serve
 ```
+
+Then open the following URL in a browser `http://localhost:4200`.
 
 ## Proceed to next step
-To proceed to next step check out branch `step-3`, see command below:
+To proceed to next step check out branch `step-4`, see command below:
 
 ```bash
-git checkout step-3
+git checkout step-4
 ```
