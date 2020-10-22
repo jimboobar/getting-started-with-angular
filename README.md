@@ -1,20 +1,15 @@
-# Getting Started With Angular
-This is a simple web project to get started with Angular. First we must:
-- Install required software
-- Checkout this repository
+# Getting Started With Angular (Step 1)
+Now that we have all required software installed we can move to the followin:
+- Install Angular CLI
+- Create Angular project
 
-## Required Software
-TODO
-
-## Checkout this repository
-To checkout, do the following command:
-```bash
-prompt$ git clone git@github.com:jimboobar/getting-started-with-angular.git
-```
+## Install Angular CLI
+Follow the official install instructions, available here:
+- https://angular.io/guide/setup-local
 
 ## Proceed to next step
-To proceed to next step check out branch `step-1`, see command below:
+To proceed to next step check out branch `step-2`, see command below:
 
 ```bash
-prompt$ git checkout step-1
+git checkout step-2
 ```
